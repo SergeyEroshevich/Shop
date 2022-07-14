@@ -1,6 +1,30 @@
-<p class="price">${{ product.price }}</p>
-<form action="{% url 'cart:cart_add' product.id %}" method="post">
-    {{ cart_product_form }}
-    {% csrf_token %}
-    <input type="submit" value="Add to cart">
-</form>
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <h2>{{ product.name }}</h2>
+
+    <div class="products-img">
+    {% for i in img %}
+        <div class="product-img">
+            <img  class="prod_img" src="{{i.img.url}}" alt="нет картинки">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="product-text">
+        <p class="price">Цена: {{ product.price }} руб.</p>
+        <p>Описание: {{ product.description }}</p>
+
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input type="submit" value="Добавить в корзину">
+        </form>
+    </div>
+</div>
+{% endblock %}

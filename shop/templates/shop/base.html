@@ -8,28 +8,73 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 <body>
-<div id="header">
-<!--    <a href="/" class="logo"><img src="{% static 'img/home.jpg' %}"></a>-->
-    <a href="/" class="logo">My shop</a>
-</div>
-<div id="subheader">
-    <div class="cart">
-        {% with total_items=cart|length %}
-            {% if cart|length > 0 %}
-                Ваша корзина:
-                <a href="{% url "cart:cart_detail" %}">
-                    {{ total_items }} шт.
-                    на сумму {{ cart.get_total_price }}$
-                </a>
-            {% else %}
-                Корзина пуста.
-            {% endif %}
-        {% endwith %}
+
+<div class="wrapper">
+    <header>
+        <div class="subheader" id="subheader">
+
+            <div class="contacts">
+                <p>Телефон:</p>
+                 <tel>+375 29 106 84 00</tel>
+            </div>
+
+            <div class="social">
+                <p style="font-family: 'Roboto', sans-serif">Мы в социальных сетях:</p>
+                <a href=""><img  src="{% static 'img/inst.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/vk.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/face.png' %}" alt=""></a>
+            </div>
+
+            <div class="logo" id="header">
+                <a href="/" ><img class="logo-img" src="{% static 'img/home.jpg' %}"></a>
+            </div>
+
+            <div class="cart">
+                {% with total_items=cart|length %}
+                    <a href="{% url 'cart:cart_detail' %}"><img class="img-cart" src="{% static 'img/cart.png' %}" alt=""></a>
+                        {% if cart|length > 0 %}
+                             <div class="cart-total"><p>{{ total_items }}</p></div>
+        <!--                        на сумму {{ cart.get_total_price }} -->
+                        {% else %}
+                             <div class="cart-total"><p>0</p></div>
+                        {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <nav id="sidebar" class="sidebar">
+            <ul>
+                <li><a href="">Доставка</a></li>
+                <li><a href="">Контакты</a></li>
+                <li><a href="">Оплата</a></li>
+            </ul>
+        </nav>
+
+
+            <nav class="categories">
+                <ul>
+                    <li {% if not category %}class="selected"{% endif %}>
+                        <a href="{% url 'shop:product_list' %}">Все категории</a>
+                    </li>
+                    {% for c in categories %}
+                        <li {% if category.slug == c.slug %} class="selected" {% endif %}>
+                            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+    </header>
+
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
     </div>
-</div>
-<div id="content">
-    {% block content %}
-    {% endblock %}
+
+
+    <footer class="footer">
+        <p>подвал сайта подвал сайта подвал сайта подвал сайта подвал сайта подвал сайта</p>
+    </footer>
 </div>
 </body>
 </html>

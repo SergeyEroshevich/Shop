@@ -6,30 +6,28 @@
 
 
 {% block content %}
-    <nav id="sidebar">
-        <h3>Категории</h3>
-        <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url 'shop:product_list' %}">Все категории</a>
-            </li>
-            {% for c in categories %}
-                <li {% if category.slug == c.slug %} class="selected" {% endif %}>
-                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </nav>
-<hr>
+
+<div class="container">
+    <div class="filter">
+        Поиск по параметрам:
+    </div>
+
     <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+        <h2 style="text-align: center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h2>
         {% for product in products %}
             <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img width="300" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                ${{ product.price }}
+                <div>
+                    <a href="{{ product.get_absolute_url }}">
+<!--                        <img class="item-img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">-->
+                        <img class="item-img" src="{{product.product_image.first.img.url}}">
+                    </a>
+                </div>
+                <div class="item-text">
+                    <p><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p><br>
+                    {{ product.price }} руб.
+                </div>
             </div>
         {% endfor %}
     </div>
+</div>
 {% endblock %}
