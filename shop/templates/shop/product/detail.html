@@ -18,13 +18,14 @@
 
     <div class="product-text">
         <p class="price">Цена: {{ product.price }} руб.</p>
-        <p>Описание: {{ product.description }}</p>
-
+        <p>Описание: {{ product.full_description }}</p>
+    </div>
+    <p>
         <form action="{% url 'cart:cart_add' product.id %}" method="post">
             {{ cart_product_form }}
             {% csrf_token %}
             <input type="submit" value="Добавить в корзину">
         </form>
-    </div>
+    </p>
 </div>
 {% endblock %}

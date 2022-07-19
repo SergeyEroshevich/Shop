@@ -4,7 +4,8 @@
     Корзина заказов
 {% endblock %}
 {% block content %}
-    <h2>Корзина</h2>
+<div class="cart-detail">
+    <h2 style="text-align: center">Корзина</h2>
     {% if cart|length > 0 %}
     <table class="cart-table">
         <thead>
@@ -23,14 +24,14 @@
                 <tr>
                     <td>
                         <a href="{{ product.get_absolute_url }}">
-                            <img class="cart-img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+                            <img class="cart-img" src="{{ product.product_image.first.img.url }}">
                         </a>
                     </td>
                     <td>{{ product.name }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td><a href="{% url 'cart:cart_remove' product.id%}">Удалить</a></td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
+                    <td><a href="{% url 'cart:cart_remove' product.id%}"><img class="cart_delete" src="{% static 'img/trash.png' %}" alt=""></a></td>
+                    <td class="num">{{ item.price }}</td>
+                    <td class="num">{{ item.total_price }}</td>
                 </tr>
             {% endwith %}
         {% endfor %}
@@ -47,8 +48,10 @@
     </p>
     {% else %}
     <div>
-        <a href="{% url 'shop:product_list' %}" class="button light">Продолжить покупки</a>
         <img src="{% static 'img/empty.png' %}" alt="нет картинки">
+        <br> <br> <br>
+        <a href="{% url 'shop:product_list' %}" class="button light">Вернуться к товарам</a>
     </div>
     {% endif %}
+</div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Image
+from .models import Category, Product, Image, Brand, Rating
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -18,3 +18,11 @@ admin.site.register(Product, ProductAdmin)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ['img', 'product']
 admin.site.register(Image, ImageAdmin)
+
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ['name']
+admin.site.register(Brand, BrandAdmin)
+
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ['rating', 'product']
+admin.site.register(Rating, RatingAdmin)

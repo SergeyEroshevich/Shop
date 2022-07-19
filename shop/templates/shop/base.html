@@ -20,13 +20,31 @@
 
             <div class="social">
                 <p style="font-family: 'Roboto', sans-serif">Мы в социальных сетях:</p>
-                <a href=""><img  src="{% static 'img/inst.png' %}" alt=""></a>
-                <a href=""><img  src="{% static 'img/vk.png' %}" alt=""></a>
-                <a href=""><img  src="{% static 'img/face.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/insti.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/tel.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/fac.png' %}" alt=""></a>
+                <a href=""><img  src="{% static 'img/vkk.png' %}" alt=""></a>
             </div>
 
             <div class="logo" id="header">
-                <a href="/" ><img class="logo-img" src="{% static 'img/home.jpg' %}"></a>
+                <a href="/" ><img class="logo-img" src="{% static 'img/log.jpg' %}"></a>
+            </div>
+
+            <div class="profile">
+                {% if not user.is_authenticated %}
+                <p><a href="">Вход в аккаунт</a></p>
+                <p><a href="">Регистрация</a></p>
+                <p><a href="">Войти через ВКонтакте</a></p>
+                <p><a href="" >Войти через Фейсбук</a></p>
+
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <p>{{user}}, вы вошли в аккаунт</p>
+                    <p><a href="">Профиль</a></p>
+                    <p><a href="">Мои заказы</a></p>
+                    <p><a href="">Выход</a></p>
+                {% endif %}
             </div>
 
             <div class="cart">
@@ -44,9 +62,11 @@
 
         <nav id="sidebar" class="sidebar">
             <ul>
+                <li><a href="">Главная</a></li>
                 <li><a href="">Доставка</a></li>
                 <li><a href="">Контакты</a></li>
                 <li><a href="">Оплата</a></li>
+                <li><a href="">Скидки</a></li>
             </ul>
         </nav>
 
@@ -73,7 +93,7 @@
 
 
     <footer class="footer">
-        <p>подвал сайта подвал сайта подвал сайта подвал сайта подвал сайта подвал сайта</p>
+        <p>Ⓒ 2022 myshop.by </p>
     </footer>
 </div>
 </body>
