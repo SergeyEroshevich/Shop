@@ -108,6 +108,7 @@ body {
     /*border: 2px solid black;*/
     box-sizing: border-box;
     /*position: relative;*/
+    min-height: 550px;
 }
 
 
@@ -303,10 +304,10 @@ a:hover{
 }
 
 .logo-img{
-    height: 90px;
-    width: 90px;
+    height: 120px;
+    width: 120px;
     border-radius: 50%;
-    padding: 10px;
+    padding: 5px;
     /*border: 1px dotted black;*/
 }
 
@@ -321,7 +322,7 @@ a:hover{
 
 .social{
     /*border: 1px dotted black;*/
-    width: 23%;
+    width: 20%;
     padding: 10px;
     color: goldenrod;
 }
@@ -351,6 +352,19 @@ a:hover{
     padding: 50px;
 }
 
+.order-info{
+    /*border: 2px solid grey;*/
+    padding-left: 100px;
+    margin: 30px;
+}
+.order-form{
+    background: #2c2c2c;
+    margin: 30px;
+    border: 1px solid grey;
+    padding: 20px 0 0 20px;
+    width: 50%;
+}
+
 .cart_delete{
     height: 50px;
     width: 50px;
@@ -359,25 +373,22 @@ a:hover{
     /*border: 2px solid red;*/
 }
 
-.pagination{
+.step-links{
     display: flex;
     position: absolute;
-    /*top: 100%;*/
     left: 50%;
-    /*transform: translate(-50%, -50%);*/
     background: darkgoldenrod;
     border-radius: 20px;
-    /*margin: auto;*/
-    /*margin-top: 20px;*/
     margin-bottom: 20px;
     padding: 0;
-    /*float: bottom;*/
+    color: black;
 }
+
 
 .pagination li{
     list-style: none;
-
 }
+
 .pagination li:first-child a{
     border-radius: 20px 0 0 20px;
 }
@@ -396,10 +407,34 @@ a:hover{
     margin: 5px;
     box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
 }
+.pagination a:hover{
+    background: grey;
+    color: orange;
+}
+
+.current{
+    margin: 5px;
+    /*position: absolute;*/
+    text-align: center;
+    height: 40px;
+    background: dimgrey;
+    border-radius: 40px;
+    /*padding: 15px;*/
+    color: wheat;
+    /*float: right;*/
+    line-height: 40px;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 
 .profile{
     /*border: 2px solid grey;*/
     color: goldenrod;
+    right: 150px;
+    position: absolute;
+    padding: 10px;
 }
 .profile ul{
     list-style: none;
@@ -412,3 +447,19 @@ a:hover{
     margin: 8px;
 }
 
+.login{
+    background: darkslategrey;
+    min-height: 550px;
+    color: goldenrod;
+    padding: 40px;
+}
+.my_orders{
+    background: darkslategrey;
+    padding: 40px;
+    min-height: 550px;
+    color: goldenrod;
+}
+.my_orders a{
+    color: orange;
+    font-size: 20px;
+}

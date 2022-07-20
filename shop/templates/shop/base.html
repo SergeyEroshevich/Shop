@@ -32,18 +32,15 @@
 
             <div class="profile">
                 {% if not user.is_authenticated %}
-                <p><a href="">Вход в аккаунт</a></p>
-                <p><a href="">Регистрация</a></p>
-                <p><a href="">Войти через ВКонтакте</a></p>
-                <p><a href="" >Войти через Фейсбук</a></p>
-
+                <p><strong><a href="{% url 'accounts:login' %}">Вход в аккаунт</a></strong></p>
+                <p><strong><a href="">Регистрация</a></strong></p>
                 {% endif %}
 
                 {% if user.is_authenticated %}
-                    <p>{{user}}, вы вошли в аккаунт</p>
-                    <p><a href="">Профиль</a></p>
-                    <p><a href="">Мои заказы</a></p>
-                    <p><a href="">Выход</a></p>
+                    <p>{{user.last_name}}, вы вошли в аккаунт</p>
+                    <p><strong><a href="">Профиль</a></strong></p>
+                    <p><strong><a href="{% url 'orders:my_orders' %}">Мои заказы</a></strong></p>
+                    <p><strong><a href="{% url 'accounts:logout' %}">Выход</a></strong></p>
                 {% endif %}
             </div>
 

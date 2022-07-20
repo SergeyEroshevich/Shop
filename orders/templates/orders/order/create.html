@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="order-create">
-    <h1>Оформление</h1>
+    <h1 style="padding-left: 170px">Оформление</h1>
     <div class="order-info">
         <h3>Ваш заказ:</h3>
         <ul>
@@ -15,14 +15,18 @@
                 </li>
             {% endfor %}
         </ul>
-        <p style="font-size: 18px"><strong>Общая сумма: {{ cart.get_total_price }} руб.</strong></p>
+        <p style="font-size: 18px; margin:20px"><strong>Общая сумма: {{ cart.get_total_price }} руб.</strong></p>
+        <p><strong>Покупатель: {{request.user.first_name}} {{request.user.last_name}}</strong></p>
     </div>
-    <form action="." method="post" class="order-form">
-        <table style="text-align: left">
-        {{ form.as_table }}
-        </table>
-        <p><input class="button" type="submit" value="Подтвердить заказ"></p>
-        {% csrf_token %}
-    </form>
+
+    <div class="order-form">
+        <form action="" method="post">
+            <table style="text-align: left">
+            {{ form.as_table }}
+            </table>
+            <p><input class="button" type="submit" value="Подтвердить заказ"></p>
+            {% csrf_token %}
+        </form>
+    </div>
 </div>
 {% endblock %}
