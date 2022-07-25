@@ -23,11 +23,14 @@ body {
     bottom: 0;
     /*min-height: 100vh;*/
     text-align: center;
-
 }
 
 .content{
     flex: 1 1 auto;
+    background: darkslategrey;
+    color: goldenrod;
+    padding: 30px;
+    min-height: 550px;
 }
 
 .sidebar{
@@ -45,8 +48,6 @@ body {
     display: flex;
     justify-content: center;
     list-style: none;
-
-
 }
 
 .categories{
@@ -60,40 +61,35 @@ body {
     display: flex;
     justify-content: center;
     height: 50px;
-    /*background: cadetblue;*/
     background: darkgoldenrod;
-    /*margin: 0 auto;*/
     padding-top: 10px;
     list-style: none;
-    /*border: 2px solid black;*/
 }
 
 .subheader{
     position: relative;
-    /*background: #fff9dc;*/
     height: 130px;
     display: flex;
     margin: auto;
-    /*border: 2px solid black;*/
 }
 
 .container{
     background: darkslategrey;
     /*border: 4px solid black;*/
-    /*height: 1500px;*/
     margin: auto;
     min-height: 550px;
     display: flex;
     color: darkgoldenrod;
+    position: relative;
 }
 .filter{
     width: 20%;
     height: 100%;
     float: left;
-    /*border: 2px solid black;*/
-    margin: 5px;
+    border: 1px solid grey;
+    /*margin: 5px;*/
     background: #2c2c2c;
-    color: wheat;
+    color: goldenrod;
     padding: 10px;
 }
 
@@ -101,14 +97,15 @@ body {
     /*background: cadetblue;*/
     background: #2c2c2c;
     /*display: flex;*/
-    margin: 5px;
-    width: 77%;
+    width: 80%;
     height: 100%;
     float: left;
-    /*border: 2px solid black;*/
+    border: 1px solid grey;
     box-sizing: border-box;
     /*position: relative;*/
     min-height: 550px;
+    margin-left: 20px;
+    padding-bottom: 100px;
 }
 
 
@@ -128,40 +125,24 @@ a:hover{
 .item{
     float: left;
     height: 390px;
-    /*background: white;*/
-    /*border: 2px solid orange;*/
     width: 20%;
     box-sizing: border-box;
     margin: 10px 15px 15px 35px;
-    /*position: relative;*/
-}
-
-.item:hover{
-    border: 1px solid goldenrod;
-    background: darkslategrey;
 }
 
 .item-img{
     /*width: 250px;*/
     height: 250px;
     max-width: 100%;
-    /*max-height: 100%;*/
-    /*border: 1px solid #2c2c2c;*/
 }
 
 .item-text{
     /*border: 2px solid #2c2c2c;*/
-    /*border: 1px solid orange;*/
     margin: 0 auto;
-    /*padding: 5px;*/
     height: 120px;
-    /*height: 130px;*/
     max-height: 100%;
-    /*background: #2c2c2c;*/
-    /*bottom: 0;*/
     color: darkgoldenrod;
     font-size: 15px;
-    /*padding: 15px;*/
     text-align: center;
 }
 
@@ -210,42 +191,35 @@ a:hover{
     bottom: 80px;
     right: 45px;
     font-size: 13px;
-
 }
 
 .cart-total p{
     position: absolute;
-    /*bottom: 20px;*/
-    /*top: 0;*/
-    /*left: 3px;*/
     color: white;
-    /*text-align: center;*/
     margin: 5px;
-
 }
 
 
 .img-cart{
     width: 50px;
     height: 50px;
-    /*border-radius: 50%;*/
-    /*border: 2px solid #2c2c2c;*/
-    /*background: white;*/
 }
 
-
 .button{
-    background: green;
-    color: white;
-    padding: 5px;
+    background: mediumseagreen;
+    padding: 17px;
     border: 1px solid darkgreen;
-    font-size: 14px;
+    border-radius: 40px;
+    font-size: 18px;
     margin: 55px;
+    color: black;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
 }
 
 .button:hover{
-    background: forestgreen;
+    background: greenyellow;
     text-decoration: none;
+    color: black;
 }
 
 .product-detail{
@@ -268,7 +242,7 @@ a:hover{
     background: white;
     margin: 10px;
     flex-direction: unset;
-    /*border: 1px solid black;*/
+    border: 2px solid black;
 }
 
 .product-text{
@@ -336,33 +310,24 @@ a:hover{
 }
 
 .cart-detail{
-    min-height: 550px;
-    background: darkslategrey;
-    color: darkgoldenrod;
-    padding: 20px;
-}
-
-.cart-detail a{
-    color: white;
 }
 
 .order-create{
-    background: darkslategrey;
-    color: goldenrod;
-    padding: 50px;
 }
 
 .order-info{
-    /*border: 2px solid grey;*/
-    padding-left: 100px;
-    margin: 30px;
+    border: 2px solid grey;
+    padding: 20px;
+    margin: 20px;
+    width: 40%;
+    background: #2c2c2c;
 }
 .order-form{
     background: #2c2c2c;
-    margin: 30px;
+    margin: 20px;
     border: 1px solid grey;
     padding: 20px 0 0 20px;
-    width: 50%;
+    width: 40%;
 }
 
 .cart_delete{
@@ -371,6 +336,16 @@ a:hover{
     /*border-radius: 50%;*/
     /*background: white;*/
     /*border: 2px solid red;*/
+}
+
+.pagination{
+    /*background: blue;*/
+    /*display: flex;*/
+    position: absolute;
+    display: flex;
+    bottom: 80px;
+    width: 80%;
+
 }
 
 .step-links{
@@ -383,7 +358,6 @@ a:hover{
     padding: 0;
     color: black;
 }
-
 
 .pagination li{
     list-style: none;
@@ -420,7 +394,7 @@ a:hover{
     background: dimgrey;
     border-radius: 40px;
     /*padding: 15px;*/
-    color: wheat;
+    color: goldenrod;
     /*float: right;*/
     line-height: 40px;
     display: block;
@@ -429,37 +403,111 @@ a:hover{
 }
 
 
-.profile{
+.profile-top{
     /*border: 2px solid grey;*/
     color: goldenrod;
     right: 150px;
     position: absolute;
     padding: 10px;
 }
-.profile ul{
+.profile-top ul{
     list-style: none;
 }
-.profile a{
+.profile-top a{
     color: goldenrod;
     padding: 5px;
 }
-.profile p{
+.profile-top p{
     margin: 8px;
 }
 
 .login{
-    background: darkslategrey;
-    min-height: 550px;
-    color: goldenrod;
-    padding: 40px;
+    background: #2c2c2c;
+    border: 1px solid grey;
+    padding: 30px 30px 30px 60px;
+    width: 30%;
 }
-.my_orders{
-    background: darkslategrey;
-    padding: 40px;
-    min-height: 550px;
-    color: goldenrod;
+.my_order{
+    background: #2c2c2c;
+    /*margin: 10px;*/
+    padding: 20px;
+    border: 2px solid grey;
+    width: 40%;
 }
+
 .my_orders a{
     color: orange;
     font-size: 20px;
+}
+
+.my_order_block{
+    color: orange;
+    border-bottom: 1px solid grey;
+    margin: 20px;
+}
+
+.profile{
+    background: #2c2c2c;
+    border: 2px solid grey;
+    padding: 30px 30px 30px 60px;
+    width: 30%;
+}
+.profile a{
+    color: orange;
+}
+.myorder-button{
+    background: mediumseagreen;
+    padding: 17px;
+    border-radius: 20px;
+    font-size: 22px;
+    margin: 55px;
+    text-align: center;
+    width: 150px;
+    color: black;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+}
+.myorder-button-text{
+    margin-bottom: 50px;
+}
+.myorder-button-text a {
+    color: black;
+}
+.myorder-button:hover{
+    background: greenyellow;
+    text-decoration: none;
+}
+
+
+.button{
+    background: mediumseagreen;
+    padding: 17px;
+    border: 1px solid darkgreen;
+    border-radius: 40px;
+    font-size: 18px;
+    margin: 55px;
+    color: black;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+}
+
+.button:hover{
+    background: greenyellow;
+    text-decoration: none;
+    color: black;
+}
+
+.button-login{
+    background: mediumseagreen;
+    padding: 10px;
+    border: 1px solid darkgreen;
+    border-radius: 40px;
+    font-size: 18px;
+    margin-left: 70px;
+    margin-top: 30px;
+    color: black;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+}
+.button-login:hover{
+    background: greenyellow;
+    text-decoration: none;
+    color: black;
 }

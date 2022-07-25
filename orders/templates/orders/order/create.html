@@ -3,8 +3,8 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
+<h1 style="padding-left: 100px">Оформление:</h1>
 <div class="order-create">
-    <h1 style="padding-left: 170px">Оформление</h1>
     <div class="order-info">
         <h3>Ваш заказ:</h3>
         <ul>
@@ -16,10 +16,11 @@
             {% endfor %}
         </ul>
         <p style="font-size: 18px; margin:20px"><strong>Общая сумма: {{ cart.get_total_price }} руб.</strong></p>
-        <p><strong>Покупатель: {{request.user.first_name}} {{request.user.last_name}}</strong></p>
     </div>
 
     <div class="order-form">
+        <h3>Введите свои данные:</h3>
+        <p><strong>Покупатель: {{request.user.first_name}} {{request.user.last_name}}</strong></p>
         <form action="" method="post">
             <table style="text-align: left">
             {{ form.as_table }}

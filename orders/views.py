@@ -11,7 +11,8 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
-
+            order.buyer = request.user
+            order.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
@@ -19,15 +20,22 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистка корзины
             cart.clear()
-            return render(request, 'orders/order/created.html',
-                          {'order': order})
+            return render(request, 'orders/order/created.html', {'order': order})
     else:
-        form = OrderCreateForm
+        form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'cart': cart, 'form': form})
 
-
-def  my_orders(request):
+# все заказы с сайта для персонала
+@login_required()
+def  all_orders(request):
     # orders = Order.objects.filter(buyer=request.user).order_by('-created')
     orders = Order.objects.all()
     context = {'orders': orders}
-    return render(request, 'orders/order/my_orders.html', context)
+    return render(request, 'orders/all_orders.html', context)
+
+# заказы покупателя
+@login_required()
+def  my_orders(request):
+    orders = Order.objects.filter(buyer=request.user)
+    context = {'orders': orders}
+    return render(request, 'orders/my_orders.html', context)

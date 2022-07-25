@@ -33,13 +33,13 @@ class Brand(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey('Category', related_name='products', on_delete=models.CASCADE)
-    brand = models.ForeignKey(Brand, related_name='brands', on_delete=models.CASCADE, null=True)
+    brand = models.ForeignKey(Brand, related_name='brands', on_delete=models.CASCADE, null=True, verbose_name='производитель')
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     description = models.TextField(blank=True)
     full_description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
+    discount = models.BooleanField(default=False, verbose_name='со скидкой')
     sale = models.DecimalField(default=1, decimal_places=2, max_digits=3)
     stock = models.PositiveIntegerField()
     available = models.BooleanField(default=True)

@@ -1,7 +1,7 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+    {% if category %}{{ category.name }}{% else %}Мой магазин{% endif %}
 {% endblock %}
 
 
@@ -9,29 +9,18 @@
 
 <div class="container">
     <div class="filter">
-        <div class="filter_sort">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form_sort.as_p}}
-                <button>OK</button>
-            </form>
-        </div>
-
         <div class="filter_search">
             <p style="font-size: 25px">Поиск по параметрам:</p>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form_search.as_p}}
-                <button>OK</button>
-            </form>
+                <form method="get">
+                    {{ filter.form.as_p }}
+                    <input type="submit" />
+                </form>
         </div>
     </div>
 
     <div id="main" class="product-list">
         <h2 style="text-align: center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h2>
-
         {% for product in page_obj %}
-
             <div class="item">
                 <div>
                     <a href="{{ product.get_absolute_url }}">
@@ -49,47 +38,43 @@
         {% endfor %}
     </div>
 
-<!--        <div class="pagination">-->
-<!--            <span class="step-links">-->
-<!--                {% if page_obj.has_previous %}-->
-<!--                    <a href="?page=1">&laquo; </a>-->
-<!--                    <a href="?page={{ page_obj.previous_page_number }}"> пред. </a>-->
-<!--                {% endif %}-->
-
-<!--                <span class="current">-->
-<!--                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
-<!--                </span>-->
-
-<!--                {% if page_obj.has_next %}-->
-<!--                    <a href="?page={{ page_obj.next_page_number }}"> след. </a>-->
-<!--                    <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>-->
-<!--                {% endif %}-->
-<!--            </span>-->
-<!--        </div>-->
-
-
-
-        <div class="pagination">
+    <div class="pagination">
+         {% if paginator.num_pages > 1 %}
             <ul class="step-links">
                 {% if page_obj.has_previous %}
-                    <li><a href="?page=1"> << </a></li>
-                    <li><a href="?page={{ page_obj.previous_page_number }}"> < </a></li>
+                    {% if 'brand' and 'name' and 'ordering' and 'price__gt' and 'price__lt' in request.get_full_path %}
+                        <li><a href="{{ request.get_full_path }}&page=1"> << </a></li>
+                        <li><a href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}"> < </a></li>
+                    {% else %}
+                        <li><a href="?page=1"> << </a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}"> < </a></li>
+                    {% endif %}
                 {% endif %}
 
                 {% for i in paginator.page_range %}
-                    <li><a href="?page={{i}}">{{i}}</a></li>
+                    {% if 'brand' and 'name' and 'ordering' and 'price__gt' and 'price__lt' in request.get_full_path %}
+                        <li><a href="{{ request.get_full_path }}&page={{ i }}">{{ i }}</a></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <li><a href="?page={{ page_obj.next_page_number }}"> > </a></li>
-                    <li><a href="?page={{ page_obj.paginator.num_pages }}"> >> </a></li>
+                    {% if 'brand' and 'name' and 'ordering' and 'price__gt' and 'price__lt' in request.get_full_path %}
+                        <li><a href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}"> > </a></li>
+                        <li><a href="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}"> >> </a></li>
+                    {% else %}
+                        <li><a href="?page={{ page_obj.next_page_number }}"> > </a></li>
+                        <li><a href="?page={{ page_obj.paginator.num_pages }}"> >> </a></li>
+                    {% endif %}
                 {% endif %}
 
                 <span class="current">
                     Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
                 </span>
             </ul>
-        </div>
+         {% endif %}
+    </div>
 
 
 

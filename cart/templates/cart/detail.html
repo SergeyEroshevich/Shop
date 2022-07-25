@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 <div class="cart-detail">
-    <h2 style="text-align: center">Корзина</h2>
+    <h1 style="text-align: center">Корзина</h1>
     {% if cart|length > 0 %}
     <table class="cart-table">
         <thead>
@@ -48,8 +48,7 @@
     </p>
     {% else %}
     <div>
-        <img src="{% static 'img/empty.png' %}" alt="нет картинки">
-        <br> <br> <br>
+        <img src="{% static 'img/cart_empty.png' %}" alt="нет картинки">
         <a href="{% url 'shop:product_list' %}" class="button light">Вернуться к товарам</a>
     </div>
     {% endif %}

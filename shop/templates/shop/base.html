@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>{% block title %}My shop{% endblock %}</title>
+    <title>{% block title %}Мой магазин{% endblock %}</title>
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 <body>
@@ -30,16 +30,21 @@
                 <a href="/" ><img class="logo-img" src="{% static 'img/log.jpg' %}"></a>
             </div>
 
-            <div class="profile">
+            {% if user.is_staff %}
+            <div style="margin-top: 50px"><a class="button" href="{% url 'orders:all_orders' %}">Заказы</a></div>
+            {% endif %}
+
+            <div class="profile-top">
                 {% if not user.is_authenticated %}
                 <p><strong><a href="{% url 'accounts:login' %}">Вход в аккаунт</a></strong></p>
-                <p><strong><a href="">Регистрация</a></strong></p>
                 {% endif %}
 
                 {% if user.is_authenticated %}
-                    <p>{{user.last_name}}, вы вошли в аккаунт</p>
-                    <p><strong><a href="">Профиль</a></strong></p>
-                    <p><strong><a href="{% url 'orders:my_orders' %}">Мои заказы</a></strong></p>
+                    <p>{{user.first_name}}, вы вошли в аккаунт</p>
+                    <p><strong><a href="{% url 'accounts:profile' %}">Профиль</a></strong></p>
+<!--                    {% if user.is_staff %}-->
+<!--                        <p><strong><a href="{% url 'orders:all_orders' %}">Заказы</a></strong></p>-->
+<!--                    {% endif %}-->
                     <p><strong><a href="{% url 'accounts:logout' %}">Выход</a></strong></p>
                 {% endif %}
             </div>
@@ -59,11 +64,11 @@
 
         <nav id="sidebar" class="sidebar">
             <ul>
-                <li><a href="">Главная</a></li>
-                <li><a href="">Доставка</a></li>
-                <li><a href="">Контакты</a></li>
-                <li><a href="">Оплата</a></li>
-                <li><a href="">Скидки</a></li>
+                <li><a href="/">Главная</a></li>
+                <li><a href="{% url 'shop:shipping' %}">Доставка</a></li>
+                <li><a href="{% url 'shop:contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'shop:payment' %}">Оплата</a></li>
+                <li><a href="{% url 'shop:discounts' %}">Скидки</a></li>
             </ul>
         </nav>
 

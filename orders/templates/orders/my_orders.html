@@ -1,0 +1,18 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    Мои заказы
+{% endblock %}
+{% block content %}
+<h1 style="padding-left: 100px">Мои заказы:</h1>
+    <div class="my_order">
+       {% for order in orders %}
+        <div class="my_order_block">
+            <p>Номер заказа: {{order.id}}</p>
+            <p>Дата заказа: {{order.created}}</p>
+            <p>Статус: {% if order.paid == False %} не оплачено {% else %} оплачено {% endif %}</p>
+            <p>Стоимость: {{order.get_total_cost}} руб.</p>
+        </div>
+    {% endfor  %}
+    </div>
+{% endblock %}

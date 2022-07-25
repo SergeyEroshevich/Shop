@@ -4,8 +4,6 @@ from shop.models import Product
 
 
 class Order(models.Model):
-    # first_name = models.CharField(max_length=50, verbose_name='фамилия')
-    # last_name = models.CharField(max_length=50, verbose_name='имя')
     buyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Покупатель')
     email = models.EmailField()
     address = models.CharField(max_length=250, verbose_name='адрес')
