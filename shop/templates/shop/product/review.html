@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    Отзывы
+{% endblock %}
+
+{% block content %}
+    <h3 style="text-align: left; padding-left: 80px">Отзывы:</h3>
+    <div class="">
+         {% for rating in product.product_rating.all %}
+             <div style="padding: 10px; margin: 10px; border: 2px solid grey; background: #2c2c2c; width: 60%">
+                 <p> {{ rating.user.first_name }}: {{ rating.rating }} </p>
+                 <p> {{ rating.review }} </p>
+             </div>
+         {% endfor %}
+    </div>
+{% endblock %}

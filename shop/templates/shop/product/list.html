@@ -13,18 +13,23 @@
             <p style="font-size: 25px">Поиск по параметрам:</p>
                 <form method="get">
                     {{ filter.form.as_p }}
-                    <input type="submit" />
+                    <input class="button-login" type="submit" />
                 </form>
         </div>
     </div>
 
     <div id="main" class="product-list">
         <h2 style="text-align: center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h2>
-        {% for product in page_obj %}
+        {% for product in products %}
             <div class="item">
                 <div>
                     <a href="{{ product.get_absolute_url }}">
-<!--                        <img class="item-img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">-->
+
+                        {% if product.discount %}
+                    <img class="discaunt" src="{% static 'img/discaunt.jpg' %}" alt="">
+<!--                    <p class="discaunt_text">{{product.sale}}%</p>-->
+                    {% endif %}
+
                         <img class="item-img" src="{{product.product_image.first.img.url}}">
                     </a>
                 </div>
@@ -33,6 +38,7 @@
                     <p>{{ product.price }} руб.</p>
                     <p>Бренд: {{product.brand}}</p>
                     <p>Осталось: {{ product.stock }} шт.</p>
+                    <p>Рейтинг: {{ product.rating }}</p>
                 </div>
             </div>
         {% endfor %}
@@ -70,13 +76,11 @@
                 {% endif %}
 
                 <span class="current">
-                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                    Страница {{ page_obj.number }} из {{ paginator.num_pages }}
                 </span>
             </ul>
          {% endif %}
     </div>
-
-
 
 </div>
 {% endblock %}

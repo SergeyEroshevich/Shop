@@ -1,12 +1,7 @@
-from django_filters.rest_framework import DjangoFilterBackend
 import django_filters
-from django_filters.widgets import LinkWidget
-from rest_framework import generics
 from django.db import models
 from django import forms
-
 from .models import Product, Brand
-
 
 class ProductFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains', label='Название')
@@ -22,20 +17,11 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = ['name', 'discount', 'brand']
-        filter_overrides = {
-            models.BooleanField:{
-                'filter_class': django_filters.BooleanFilter,
-                'extra': lambda f: {
-                    'widget': forms.CheckboxInput,
-                },
-            },
-            # models.ForeignKey:{
-            #     'filter_class': django_filters.ModelMultipleChoiceFilter,
-            #     'extra': lambda f: {
-            #         'widget': forms.CheckboxSelectMultiple,
-            #     },
-            # },
-        }
-
-# class UserListView(generics.ListAPIView):
-#     filter_backends = [DjangoFilterBackend]
+        # filter_overrides = {
+        #     models.BooleanField:{
+        #         'filter_class': django_filters.BooleanFilter,
+        #         'extra': lambda f: {
+        #             'widget': forms.CheckboxInput,
+        #         },
+        #     },
+        # }

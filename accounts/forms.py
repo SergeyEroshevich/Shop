@@ -22,9 +22,21 @@ class RegistrationForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30, label='Фамилия')
     password = forms.CharField(max_length=30, label='Пароль', widget=forms.PasswordInput())
     email = forms.EmailField(label='Электронная почта')
-    # phone = forms.CharField(label='Телефон', validators = [validator_phone])
-    # adress = forms.CharField(max_length=100, label='Адрес', widget=forms.Textarea)
 
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'last_name', 'email')
+
+
+class ChangeUserlnfoForm(forms.ModelForm):
+    phone = forms.CharField( label='Телефон', validators=[validator_phone], required=False)
+    postal_code = forms.CharField(max_length=20, label='Почтовый индекс', required=False)
+    city = forms.CharField(max_length=100, label='Город', required=False)
+    street = forms.CharField(max_length=100, label='Улица', required=False)
+    house = forms.CharField(max_length=100, label='Дом', required=False)
+    building = forms.CharField(max_length=100, label='Корпус', required=False)
+    apartment = forms.CharField(max_length=100, label='Квартира', required=False)
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'phone', 'postal_code', 'city', 'street', 'house', 'building', 'apartment')

@@ -19,6 +19,13 @@
     <div class="product-text">
         <p class="price">Цена: {{ product.price }} руб.</p>
         <p>Описание: {{ product.full_description }}</p>
+        <p>Рейтинг: {{ product.rating }}
+            {% if count > 0 %}
+                <a style="color: deepskyblue; padding-left: 25px" href="{{ product.get_absolute_url }}review/"> {{ count }} {{ word }}</a>
+            {% else %}
+                <span style="color: grey; padding-left: 25px">Нет отзывов</span>
+            {% endif %}
+        </p>
     </div>
     <p>
         <form action="{% url 'cart:cart_add' product.id %}" method="post">
@@ -27,5 +34,8 @@
             <input type="submit" value="Добавить в корзину">
         </form>
     </p>
+
 </div>
+
+
 {% endblock %}

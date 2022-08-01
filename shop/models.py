@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -57,8 +58,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('shop:product_detail',
-                        args=[self.id, self.slug])
+        return reverse('shop:product_detail', args=[self.id, self.slug])
 
 class Image(models.Model):
     img = models.ImageField(upload_to='product/%Y/%m/%d')
@@ -70,8 +70,13 @@ class Image(models.Model):
 
 class Rating(models.Model):
     rating  = models.PositiveIntegerField()
+    review = models.CharField(max_length=300, verbose_name='Отзыв', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='product_rating')
 
     class Meta:
         verbose_name = 'Рейтинг'
         verbose_name_plural = 'Рейтинги'
+        unique_together = ('user', 'product')
+
+

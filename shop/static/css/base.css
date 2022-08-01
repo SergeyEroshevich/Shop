@@ -18,10 +18,9 @@ body {
 .footer{
     height: 60px;
     width: 100%;
-    /*border: 2px solid black;*/
+    /*border: 2px solid red;*/
     background: rgba(0,0,0,0.36);
     bottom: 0;
-    /*min-height: 100vh;*/
     text-align: center;
 }
 
@@ -90,7 +89,9 @@ body {
     /*margin: 5px;*/
     background: #2c2c2c;
     color: goldenrod;
-    padding: 10px;
+    padding-bottom: 25px;
+    padding-left: 15px;
+    min-height: 560px;
 }
 
 .product-list{
@@ -250,7 +251,7 @@ a:hover{
     width: 60%;
     float: left;
     /*display: flex;*/
-    /*flex-direction: column;*/
+    flex-direction: column;
     padding: 10px;
     margin: 10px;
     background: #2c2c2c;
@@ -339,8 +340,6 @@ a:hover{
 }
 
 .pagination{
-    /*background: blue;*/
-    /*display: flex;*/
     position: absolute;
     display: flex;
     bottom: 80px;
@@ -426,34 +425,41 @@ a:hover{
     border: 1px solid grey;
     padding: 30px 30px 30px 60px;
     width: 30%;
+    display: flex;
 }
-.my_order{
+
+.filter_order{
+    float: left;
+    width: 20%;
     background: #2c2c2c;
-    /*margin: 10px;*/
-    padding: 20px;
     border: 2px solid grey;
-    width: 40%;
+    margin-right: 20px;
+    padding: 20px;
 }
-
-.my_orders a{
-    color: orange;
-    font-size: 20px;
-}
-
-.my_order_block{
-    color: orange;
-    border-bottom: 1px solid grey;
+.my_orders-table{
+    background: #2c2c2c;
     margin: 20px;
+    padding: 20px;
+    padding-bottom: 80px;
+    border: 2px solid grey;
+    width: 70%;
+    /*display: flex;*/
+}
+.my_orders-table td{
+    /*background: rgba(0,33,67,0.06);*/
+    padding: 20px;
+    border-bottom: 1px solid grey;
+    text-align: center;
 }
 
 .profile{
     background: #2c2c2c;
     border: 2px solid grey;
     padding: 30px 30px 30px 60px;
-    width: 30%;
+    width: 50%;
 }
 .profile a{
-    color: orange;
+    color: wheat;
 }
 .myorder-button{
     background: mediumseagreen;
@@ -467,7 +473,7 @@ a:hover{
     box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
 }
 .myorder-button-text{
-    margin-bottom: 50px;
+    margin: 50px;
 }
 .myorder-button-text a {
     color: black;
@@ -476,7 +482,6 @@ a:hover{
     background: greenyellow;
     text-decoration: none;
 }
-
 
 .button{
     background: mediumseagreen;
@@ -510,4 +515,60 @@ a:hover{
     background: greenyellow;
     text-decoration: none;
     color: black;
+}
+
+.my_orders{
+    position: relative;
+}
+.pagination-orders{
+    position: absolute;
+    bottom: 80px;
+    width: 80%;
+    display: flex;
+}
+
+.pagination-orders li{
+    list-style: none;
+}
+
+.pagination-orders li:first-child a{
+    border-radius: 20px 0 0 20px;
+}
+.pagination-orders li:last-child a{
+    border-radius:  0 20px 20px 0;
+}
+.pagination-orders a{
+    color: orange;
+    display: block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: dimgrey;
+    border-radius: 40%;
+    margin: 5px;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+}
+.pagination-orders a:hover{
+    background: grey;
+    color: orange;
+}
+
+.discaunt{
+    width: 40px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.discaunt_text{
+    width: 70px;
+    height: 60px;
+    border-radius: 50%;
+    color: red;
+}
+
+.discount_managment{
+    background: #2c2c2c;
+    border: 2px solid grey;
+    padding: 20px;
 }

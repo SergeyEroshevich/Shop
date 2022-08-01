@@ -1,17 +1,43 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from shop.models import Product
 
 
 class Order(models.Model):
+    CHOICES_PAYMENT = (
+        ('Наличные','Наличные при получении'),
+        ('Оплата картой', 'Оплата картой'),
+    )
+
+    CHOICES_DELIVERY = (
+        ('Самовывоз', 'Самовывоз'),
+        ('Курьер', 'Курьер'),
+        ('Почта', 'Почта'),
+    )
+
+    CHOICES_STATUS = (
+        ('Принято в обработку', 'Принято в обработку'),
+        ('Упакован и отправлен', 'Упакован и отправлен'),
+        ('Доставлен покупателю', 'Доставлен покупателю'),
+        ('Отменен', 'Отменен'),
+    )
+
     buyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Покупатель')
+    status = models.CharField(max_length=50, default='Принято в обработку', choices=CHOICES_STATUS, verbose_name='Статус заказа')
+    payment = models.CharField(max_length=50, choices=CHOICES_PAYMENT, verbose_name='Способ оплаты')
+    delivery = models.CharField(max_length=50, choices=CHOICES_DELIVERY, verbose_name='Способ доставки')
     email = models.EmailField()
-    address = models.CharField(max_length=250, verbose_name='адрес')
-    postal_code = models.CharField(max_length=20, verbose_name='почтовый индекс')
+    phone = models.CharField(max_length=13, blank=True)
+    postal_code = models.CharField(max_length=20, verbose_name='почтовый индекс', blank=True)
     city = models.CharField(max_length=100, verbose_name='город')
+    street = models.CharField(max_length=100, verbose_name='улица')
+    house = models.CharField(max_length=100, verbose_name='дом')
+    building = models.CharField(max_length=100, verbose_name='корпус', blank=True)
+    apartment = models.CharField(max_length=100, verbose_name='квартира', blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False, verbose_name='Оплачено')
 
     class Meta:
         ordering = ('-created',)
@@ -23,6 +49,9 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
+
+    def get_absolute_url(self):
+        return reverse('orders:detail_order', args=[self.id])
 
 
 class OrderItem(models.Model):
