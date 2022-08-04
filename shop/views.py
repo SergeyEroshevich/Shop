@@ -18,7 +18,7 @@ def product_list(request, category_slug=None):
         products = products.filter(category=category)
 
     filter = ProductFilter(request.GET, queryset=products)
-    paginator = Paginator(filter.qs, 6)
+    paginator = Paginator(filter.qs, 8)
     if 'page' in request.GET:
         page_number = request.GET['page']
     else:
