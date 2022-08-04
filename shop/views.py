@@ -1,26 +1,18 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.db.models import ExpressionWrapper, F, IntegerField
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
-
 from .filter import ProductFilter
-from .forms import RatingForm,  DiscountForm, DiscountDeleteForm
+from .forms import DiscountForm, DiscountDeleteForm
 from .models import Category, Product, Image,  Rating
-from cart.forms import CartAddProductForm
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
-
-# class ProductListView(ListView):
-#     paginate_by = 3
-#     model = Product
-#     template_name = 'shop/product/list.html'
-
+from django.core.paginator import Paginator
 
 # список всех товаров на сайте
-def product_list(request, category_slug=None, page=None):
+def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.annotate(value_sale=ExpressionWrapper(100 - F('sale') * 100, IntegerField()),
+                                        sale_price=F('price') * F('sale')).filter(available=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -41,7 +33,6 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     rating = Rating.objects.filter(product=product)
     img = Image.objects.filter(product_id=id)
-    cart_product_form = CartAddProductForm()
     count = int(str(rating.count())[-1])
     if count == 1:
         word = 'отзыв'
@@ -49,28 +40,28 @@ def product_detail(request, id, slug):
         word = 'отзыва'
     else:
         word = 'отзывов'
-    context = {'product': product, 'cart_product_form': cart_product_form, 'img': img, 'count': rating.count, 'word': word}
+    context = {'product': product, 'img': img, 'count': rating.count, 'word': word}
     return render(request, 'shop/product/detail.html', context)
 
 
 def product_review(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    context = {'product': product}
+    users = [x.user for x in product.product_rating.all()]
+    context = {'product': product, 'users': users}
     return render(request, 'shop/product/review.html', context)
 
 
 @login_required()
-def review_and_rating(request, product_id):
-    form = RatingForm()
-    product = Product.objects.get(id=product_id)
+def review_and_rating(request, id, slug):
+    product = Product.objects.get(id=id, slug=slug)
     if request.method == 'POST':
         # возможность изменять рейтинг товара вместо того чтобы иметь возможность оценивать только один раз
         # updated_values = {'rating': request.POST['rating']}
         # rating, created = Rating.objects.update_or_create(product=product, user=request.user, defaults=updated_values)
-        rating = Rating.objects.create(product=product, user=request.user, rating=request.POST['rating'], review=request.POST.get('review'))
+        rating = Rating.objects.create(product=product, user=request.user, rating=request.POST['simple-rating'], review=request.POST.get('review'))
         rating.save()
         if product.rating == None:
-            product.rating = request.POST['rating']
+            product.rating = request.POST['simple-rating']
         else:
             count = product.product_rating.count()
             sum = 0
@@ -79,9 +70,10 @@ def review_and_rating(request, product_id):
             rating = sum/count
             product.rating = round(rating, 1)
         product.save()
-        return redirect('/orders/my_orders/')
-    context = {'product':product, 'form':form}
-    return render(request, 'shop/product/add_review_and_rating.html', context)
+        url = f'/product_detail/{id}/{slug}/review/'
+        return redirect(url)
+    context = {'product':product}
+    return render(request, 'shop/product/rating_review.html', context)
 
 
 @staff_member_required

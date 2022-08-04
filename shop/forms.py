@@ -1,17 +1,6 @@
 from django import forms
 
-from .models import Rating, Product, Category
-
-
-class RatingForm(forms.ModelForm):
-    CHOICES = ((1,1), (2,2), (3,3), (4,4), (5,5))
-    rating = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect, label='Оценка')
-    review = forms.CharField(widget=forms.Textarea, label='Отзыв', required=False)
-
-    class Meta:
-        model = Rating
-        fields = ('rating', 'review')
-
+from .models import Product, Category
 
 class DiscountDeleteForm(forms.Form):
     product_discount = forms.ModelMultipleChoiceField(queryset=Product.objects.filter(discount=True),

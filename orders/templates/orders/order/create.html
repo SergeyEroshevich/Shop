@@ -21,6 +21,7 @@
     <div class="order-form">
         <h3>Введите свои данные:</h3>
         <p><strong>Покупатель: {{request.user.first_name}} {{request.user.last_name}}</strong></p>
+        <p><strong>Телефон: {{ request.user.profile.phone }}</strong></p>
         <form action="" method="post">
             <table style="text-align: left">
             {{ form.as_table }}

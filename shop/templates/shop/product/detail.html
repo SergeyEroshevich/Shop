@@ -1,5 +1,7 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load mathfilters %}
+{% load floattags %}
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
@@ -17,25 +19,45 @@
     </div>
 
     <div class="product-text">
-        <p class="price">Цена: {{ product.price }} руб.</p>
+
+        <div class="form__item">
+             <div class="rating">
+                 <div class="rating__body">
+                      <div class="rating__active"></div>
+                 </div>
+                 <div class="rating__value">{{ product.rating|formatted_float }}</div>
+
+                {% if count > 0 %}
+                    <a style="color: deepskyblue; font-size: 18px; padding-bottom: 3px" href="{{ product.get_absolute_url }}review/"> {{ count }} {{ word }}</a>
+                {% else %}
+                    <span style="color: grey; font-size: 18px; padding-bottom: 3px">Нет отзывов</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <p>Цена: {{ product.price|mul:product.sale|floatformat:2 }} руб.</p>
         <p>Описание: {{ product.full_description }}</p>
-        <p>Рейтинг: {{ product.rating }}
-            {% if count > 0 %}
-                <a style="color: deepskyblue; padding-left: 25px" href="{{ product.get_absolute_url }}review/"> {{ count }} {{ word }}</a>
-            {% else %}
-                <span style="color: grey; padding-left: 25px">Нет отзывов</span>
-            {% endif %}
-        </p>
+        {% if product.stock > 0 %}
+            <p>Осталось: {{ product.stock }} шт.</p>
+        {% else %}
+            <p style="color: red">Нет в наличии</p>
+        {% endif %}
     </div>
-    <p>
-        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value="Добавить в корзину">
-        </form>
-    </p>
+
+    <div style="margin-top: 20px">
+       {% if product.stock %}
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                {% csrf_token %}
+                <span >Количество:</span>
+                <input type="number" value="1" name="quantity" max={{product.stock}} min="1">
+                <input type="text" value="True" name="update" hidden>
+                <span style="color: grey; font-size: 14px">(укажите не более {{product.stock}})</span>
+                <p><input style="margin: 5px" class="button" type="submit" value="Добавить в корзину"></p>
+            </form>
+        {% endif %}
+    </div>
 
 </div>
 
-
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

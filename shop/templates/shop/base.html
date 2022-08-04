@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -20,10 +19,10 @@
 
             <div class="social">
                 <p style="font-family: 'Roboto', sans-serif">Мы в социальных сетях:</p>
-                <a href=""><img  src="{% static 'img/insti.png' %}" alt=""></a>
-                <a href=""><img  src="{% static 'img/tel.png' %}" alt=""></a>
-                <a href=""><img  src="{% static 'img/fac.png' %}" alt=""></a>
-                <a href=""><img  src="{% static 'img/vkk.png' %}" alt=""></a>
+                <a href="https://www.instagram.com/sergeyeroshevich/" target="blank"><img  src="{% static 'img/insti.png' %}" alt=""></a>
+<!--                <a href=""><img  src="{% static 'img/tel.png' %}" alt=""></a>-->
+                <a href="https://www.facebook.com/sergey.eroshevich" target="blank"><img  src="{% static 'img/fac.png' %}" alt=""></a>
+                <a href="https://vk.com/id107526949" target="blank"><img  src="{% static 'img/vkk.png' %}" alt=""></a>
             </div>
 
             <div class="logo" id="header">
@@ -32,7 +31,6 @@
 
             {% if user.is_staff %}
             <div style="margin-top: 50px"><a class="button" href="{% url 'orders:all_orders' %}">Заказы</a></div>
-            <div style="margin-top: 50px"><a class="button" href="{% url 'shop:discount_managment' %}">Скидки</a></div>
             {% endif %}
 
             <div class="profile-top">
@@ -54,7 +52,7 @@
                     <a href="{% url 'cart:cart_detail' %}"><img class="img-cart" src="{% static 'img/cart.png' %}" alt=""></a>
                         {% if cart|length > 0 %}
                              <div class="cart-total"><p>{{ total_items }}</p></div>
-        <!--                        на сумму {{ cart.get_total_price }} -->
+<!--                                на сумму {{ cart.get_total_price }}-->
                         {% else %}
                              <div class="cart-total"><p>0</p></div>
                         {% endif %}
@@ -69,6 +67,9 @@
                 <li><a href="{% url 'shop:contacts' %}">Контакты</a></li>
                 <li><a href="{% url 'shop:payment' %}">Оплата</a></li>
                 <li><a href="{% url 'shop:discounts' %}">Скидки</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'shop:discount_managment' %}">Управление скидками</a></li>
+                {% endif %}
             </ul>
         </nav>
 

@@ -57,6 +57,7 @@ class Cart(object):
 
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
+            item['price'] = round((item['price'] * item['product'].sale), 2)
             item['total_price'] = item['price'] * item['quantity']
             yield item
 

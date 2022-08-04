@@ -72,7 +72,9 @@ class Rating(models.Model):
     rating  = models.PositiveIntegerField()
     review = models.CharField(max_length=300, verbose_name='Отзыв', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='product_rating')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_rating')
+    created = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         verbose_name = 'Рейтинг'

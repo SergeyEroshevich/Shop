@@ -126,6 +126,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+DATE_FORMAT = 'd E Y'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -141,3 +143,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 CART_SESSION_ID = 'cart'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# выводить письмо в консоль
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.by'
+EMAIL_HOST_USER = 'micromagic.by@yandex.by'
+EMAIL_HOST_PASSWORD = 'R1hkdf58223s'
+EMAIL_PORT = 587
+

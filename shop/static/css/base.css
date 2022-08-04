@@ -125,10 +125,10 @@ a:hover{
 
 .item{
     float: left;
-    height: 390px;
+    height: 425px;
     width: 20%;
     box-sizing: border-box;
-    margin: 10px 15px 15px 35px;
+    margin: 10px 15px 70px 35px;
 }
 
 .item-img{
@@ -146,6 +146,7 @@ a:hover{
     font-size: 15px;
     text-align: center;
 }
+
 
 .item-text a{
     color: goldenrod;
@@ -555,20 +556,131 @@ a:hover{
 }
 
 .discaunt{
-    width: 40px;
-    height: 30px;
+    width: 30px;
+    height: 25px;
     border-radius: 50%;
 }
 
 .discaunt_text{
-    width: 70px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    color: red;
+    color: black;
+    background: coral;
+    text-align: center;
+    padding: 10px 20px 10px 10px;
+    margin-right: 20px;
+    font-size: 20px;
+    display: flex;
+    position: absolute;
 }
 
 .discount_managment{
     background: #2c2c2c;
     border: 2px solid grey;
     padding: 20px;
+    margin: 20px;
+    width: 50%
+}
+
+.simple-rating{
+    position: relative;
+    font-size: 40px;
+    display: inline-block;
+}
+.simple-rating::before{
+    content: '★★★★★';
+    display: block;
+}
+.simple-rating__items{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    overflow: hidden;
+}
+.simple-rating__item{
+    position: absolute;
+    width: 0%;
+    height: 0%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.simple-rating__label{
+    flex: 0 0 20%;
+    height: 100%;
+    cursor: pointer;
+    color: white;
+}
+.simple-rating__label::before{
+    content: '★';
+    display: block;
+    transition: color 0.3s ease 0s;
+}
+.simple-rating__item:checked,
+.simple-rating__item:checked ~ .simple-rating__label{
+    color: goldenrod;
+}
+
+.simple-rating__label:hover,
+.simple-rating__label:hover ~ .simple-rating__label,
+.simple-rating__label:checked ~ .simple-rating__label:hover{
+    color: khaki;
+}
+
+.rating{
+    display: flex;
+    align-items: flex-end;
+    font-size: 30px;
+    line-height: 0.75;
+    color: white;
+}
+.rating__body{
+    position: relative;
+}
+.rating__body::before{
+    content: '★★★★★';
+    display: block;
+}
+.rating__active{
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.rating__active::before{
+    content: '★★★★★';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: goldenrod;
+}
+.rating__items{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+.rating__item{
+    flex: 0 0 20px;
+    height: 100%;
+    opacity: 0;
+}
+
+.rating__value{
+    font-size: 10%;
+    line-height: 1;
+    padding: 0 0 0 10px;
+    visibility: hidden;
 }
