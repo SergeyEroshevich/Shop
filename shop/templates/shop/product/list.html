@@ -8,18 +8,32 @@
 
 
 {% block content %}
+<div class="search">
+    <form  action="">
+         <span class="">Поиск: </span><span class="" >{{ filter.form.name }}</span>
+        <button>
+            <img src="{% static 'img/лупа.jpg' %}" style="height:20px; width:20px" alt="">
+        </button>
+    </form>
+</div>
 
 <div class="container">
     <div class="filter">
         <div class="filter_search">
             <p style="font-size: 25px">Поиск по параметрам:</p>
-                <form method="get">
-                    {{ filter.form.as_p }}
-                    <p class="form" >{{ filter.form.name }}</p>
-                    <input class="button-login" type="submit" />
+                <form class="form" method="get">
+<!--                    {{ filter.form.as_p }}-->
+                    <p>Со скидкой: {{ filter.form.discount }}</p>
+                    <p>Производитель: {{ filter.form.brand }}</p>
+                    <p>Цена от {{ filter.form.price__gt }}</p>
+                    <p>Цена до {{ filter.form.price__lt }}</p>
+                    <p>Упорядочить: {{ filter.form.ordering }}</p>
+                    <input class="button-login" type="submit" style="padding-bottom: 30px" >
                 </form>
         </div>
     </div>
+
+
 
     <div id="main" class="product-list">
         <h2 style="text-align: center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h2>

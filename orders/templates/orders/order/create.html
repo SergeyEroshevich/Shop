@@ -19,14 +19,14 @@
     </div>
 
     <div class="order-form">
-        <h3>Введите свои данные:</h3>
         <p><strong>Покупатель: {{request.user.first_name}} {{request.user.last_name}}</strong></p>
-        <p><strong>Телефон: {{ request.user.profile.phone }}</strong></p>
-        <form action="" method="post">
+        <p><strong>Телефон: {{ request.user.profile.phone }}</strong></p><br>
+        <p>Введите свои данные:</p>
+        <form class="form" action="" method="post">
             <table style="text-align: left">
             {{ form.as_table }}
             </table>
-            <p><input class="button" type="submit" value="Подтвердить заказ"></p>
+            <p><input class="button" style="padding-bottom: 35px; margin-left: 200px" type="submit" value="Подтвердить заказ"></p>
             {% csrf_token %}
         </form>
     </div>

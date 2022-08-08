@@ -1,14 +1,15 @@
 import django_filters
 from django.db import models
 from django import forms
+from django.forms import TextInput, CheckboxSelectMultiple
+
 from .models import Product, Brand
 
 class ProductFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains', label='Найти')
+    name = django_filters.CharFilter(lookup_expr='icontains', label='Найти', widget=TextInput(attrs={'placeholder': 'введите название товара'}))
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt', label='Цена от')
     price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt', label='Цена до')
-    brand = django_filters.ModelMultipleChoiceFilter(queryset=Brand.objects.all())
-
+    brand = django_filters.ModelMultipleChoiceFilter(queryset=Brand.objects.all(), widget=CheckboxSelectMultiple)
     ordering = django_filters.OrderingFilter(label='Упорядочить', choices=(('price', 'цена по возрастанию'),
                                                                               ('-price', 'цена по убыванию'),
                                                                               ('name', 'по названию'),
@@ -17,11 +18,12 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = ['name', 'discount', 'brand']
-        # filter_overrides = {
-        #     models.BooleanField:{
-        #         'filter_class': django_filters.BooleanFilter,
-        #         'extra': lambda f: {
-        #             'widget': forms.CheckboxInput,
-        #         },
-        #     },
-        # }
+        filter_overrides = {
+            models.BooleanField:{
+                'filter_class': django_filters.BooleanFilter,
+                'extra': lambda f: {
+                    'widget': forms.RadioSelect,
+                },
+            },
+        }
+

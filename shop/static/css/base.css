@@ -28,7 +28,7 @@ body {
     flex: 1 1 auto;
     background: darkslategrey;
     color: goldenrod;
-    padding: 30px;
+    padding: 10px;
     min-height: 550px;
 }
 
@@ -109,6 +109,19 @@ body {
     padding-bottom: 100px;
 }
 
+/*поле поиска товара*/
+.search{
+    font-weight: bolder;
+    margin: 0 0 10px 430px;
+}
+.search input{
+    background: wheat;
+    border: 2px solid darkgoldenrod;
+    color: black;
+    height: 30px;
+    width: 800px;
+    font-size: 18px;
+}
 
 nav a{
     margin:10px;
@@ -487,7 +500,7 @@ a:hover{
 
 .button{
     background: mediumseagreen;
-    padding: 17px;
+    /*padding: 17px;*/
     border: 1px solid darkgreen;
     border-radius: 40px;
     font-size: 18px;
@@ -685,3 +698,29 @@ a:hover{
     padding: 0 0 0 10px;
     visibility: hidden;
 }
+
+
+.form label{
+    display: block;
+    margin: 15px;
+    font-weight: normal;
+
+
+}
+.form input{
+    color: wheat;
+    font-size: 16px;
+    border: 1px solid goldenrod;
+    background: transparent;
+    height: 20px;
+    padding-left: 10px;
+}
+.form select{
+    background: transparent;
+    color: wheat;
+    border: 1px solid goldenrod;
+    font-size: 16px;
+    height: 30px;
+}
+
+

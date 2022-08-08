@@ -6,7 +6,7 @@
 {% block content %}
 <h1 style="padding-left: 100px">Изменение данных:</h1>
 <div class="profile_change">
-    <form action="" method="POST">
+    <form class="form" action="" method="POST">
         {% csrf_token %}
         <table>
             {{form.as_table}}
