@@ -178,8 +178,8 @@ a:hover{
     height: 100px;
     width: 100px;
     /*border: 1px dotted red;*/
-    right: 22px;
-    bottom: 2px;
+    right: 200px;
+    top: 30px;
 }
 
 
@@ -280,11 +280,9 @@ a:hover{
 }
 
 .logo-img{
-    height: 120px;
-    width: 120px;
+    height: 130px;
+    width: 140px;
     border-radius: 50%;
-    padding: 5px;
-    /*border: 1px dotted black;*/
 }
 
 .contacts{
@@ -406,9 +404,11 @@ a:hover{
 .profile-top{
     /*border: 2px solid grey;*/
     color: goldenrod;
-    right: 150px;
+    right: 10px;
     position: absolute;
     padding: 10px;
+    margin-top: 10px;
+    display: inline-block;
 }
 .profile-top ul{
     list-style: none;
@@ -418,7 +418,8 @@ a:hover{
     padding: 5px;
 }
 .profile-top p{
-    margin: 8px;
+    margin: 6px;
+    font-size: 14px;
 }
 
 .login{

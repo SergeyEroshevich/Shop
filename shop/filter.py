@@ -4,7 +4,7 @@ from django import forms
 from .models import Product, Brand
 
 class ProductFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains', label='Название')
+    name = django_filters.CharFilter(lookup_expr='icontains', label='Найти')
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt', label='Цена от')
     price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt', label='Цена до')
     brand = django_filters.ModelMultipleChoiceFilter(queryset=Brand.objects.all())

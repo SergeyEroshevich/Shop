@@ -2,6 +2,7 @@
 {% load static %}
 {% load mathfilters %}
 {% load floattags %}
+{% load products_extras %}
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
@@ -28,7 +29,8 @@
                  <div class="rating__value">{{ product.rating|formatted_float }}</div>
 
                 {% if count > 0 %}
-                    <a style="color: deepskyblue; font-size: 18px; padding-bottom: 3px" href="{{ product.get_absolute_url }}review/"> {{ count }} {{ word }}</a>
+                    <a style="color: deepskyblue; font-size: 18px; padding-bottom: 3px" href="{{ product.get_absolute_url }}review/">
+                        {{ count }} {{ count|ru_plural:"отзыв,отзыва,отзывов" }}</a>
                 {% else %}
                     <span style="color: grey; font-size: 18px; padding-bottom: 3px">Нет отзывов</span>
                 {% endif %}

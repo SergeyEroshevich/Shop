@@ -26,26 +26,13 @@
             </div>
 
             <div class="logo" id="header">
-                <a href="/" ><img class="logo-img" src="{% static 'img/log.jpg' %}"></a>
+                <a href="/" ><img class="logo-img" src="{% static 'img/logo2.jpg' %}"></a>
             </div>
 
             {% if user.is_staff %}
             <div style="margin-top: 50px"><a class="button" href="{% url 'orders:all_orders' %}">Заказы</a></div>
             {% endif %}
 
-            <div class="profile-top">
-                {% if not user.is_authenticated %}
-                <p><strong><a href="{% url 'accounts:login' %}">Вход в аккаунт</a></strong></p>
-                <p><strong><a href="{% url 'accounts:registration' %}">Регистрация</a></strong></p>
-                {% endif %}
-
-                {% if user.is_authenticated %}
-                    <p>{{user.first_name}}, вы вошли в аккаунт</p>
-                    <p><strong><a href="{% url 'accounts:profile' %}">Профиль</a></strong></p>
-                    <p><strong><a href="{% url 'orders:my_orders' %}">Мои заказы</a></strong></p>
-                    <p><strong><a href="{% url 'accounts:logout' %}">Выход</a></strong></p>
-                {% endif %}
-            </div>
 
             <div class="cart">
                 {% with total_items=cart|length %}
@@ -58,6 +45,23 @@
                         {% endif %}
                 {% endwith %}
             </div>
+
+
+            <div class="profile-top">
+                {% if not user.is_authenticated %}
+                <p><strong><a href="{% url 'accounts:login' %}">Вход в аккаунт</a></strong></p>
+                <p><strong><a href="{% url 'accounts:registration' %}">Регистрация</a></strong></p>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <p style="font-size: 13px">{{user.first_name}}, вы вошли в аккаунт</p>
+                    <p><strong><a href="{% url 'accounts:profile' %}">Профиль</a></strong></p>
+                    <p><strong><a href="{% url 'orders:my_orders' %}">Мои заказы</a></strong></p>
+                    <p><strong><a href="{% url 'accounts:logout' %}">Выход</a></strong></p>
+                {% endif %}
+            </div>
+
+
         </div>
 
         <nav id="sidebar" class="sidebar">

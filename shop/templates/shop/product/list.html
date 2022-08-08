@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}
 {% load floattags %}
+{% load products_extras %}
     {% if category %}{{ category.name }}{% else %}Мой магазин{% endif %}
 {% endblock %}
 
@@ -14,6 +15,7 @@
             <p style="font-size: 25px">Поиск по параметрам:</p>
                 <form method="get">
                     {{ filter.form.as_p }}
+                    <p class="form" >{{ filter.form.name }}</p>
                     <input class="button-login" type="submit" />
                 </form>
         </div>
@@ -52,6 +54,16 @@
                             </div>
                         </div>
                     </a>
+                    {% if product.rating > 0 %}
+                        <p>
+                            <a style="color: deepskyblue; font-size: 18px; padding-bottom: 3px"
+                                href="{{ product.get_absolute_url }}review/">
+                                {{ product.product_rating.count }}  {{ product.product_rating.count|ru_plural:"отзыв,отзыва,отзывов" }}
+                            </a>
+                        </p>
+                    {% else %}
+                        <p style="color: grey; font-size: 18px; padding-bottom: 3px">Нет отзывов</p>
+                    {% endif %}
                 </div>
 
 

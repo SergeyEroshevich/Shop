@@ -33,14 +33,8 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     rating = Rating.objects.filter(product=product)
     img = Image.objects.filter(product_id=id)
-    count = int(str(rating.count())[-1])
-    if count == 1:
-        word = 'отзыв'
-    elif 1 < count < 5:
-        word = 'отзыва'
-    else:
-        word = 'отзывов'
-    context = {'product': product, 'img': img, 'count': rating.count, 'word': word}
+    count = rating.count()
+    context = {'product': product, 'img': img, 'count': count}
     return render(request, 'shop/product/detail.html', context)
 
 
