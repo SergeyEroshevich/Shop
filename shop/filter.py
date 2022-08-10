@@ -1,6 +1,4 @@
 import django_filters
-from django.db import models
-from django import forms
 from django.forms import TextInput, CheckboxSelectMultiple, CheckboxInput
 from .models import Product, Brand
 
@@ -26,13 +24,6 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = ['rating', 'name', 'discount', 'brand']
-        # filter_overrides = {
-        #     models.BooleanField:{
-        #         'filter_class': django_filters.BooleanFilter,
-        #         'extra': lambda f: {
-        #             'widget': forms.CheckboxInput,
-        #         },
-        #     },
-        # }
+
 
 
