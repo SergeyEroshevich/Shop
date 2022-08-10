@@ -46,7 +46,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    rating = models.FloatField(null=True, blank=True)
+    rating = models.FloatField(default=0)
 
     class Meta:
         ordering = ('name',)

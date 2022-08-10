@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 def validator_phone(value):
     if not value.isnumeric():
         raise forms.ValidationError('Поле должно содержать только цифры')
-    if len(value) < 7:
-        raise forms.ValidationError('Не хватает цифр')
+    if len(value) < 9:
+        raise forms.ValidationError('Некорректный номер')
 
 class LoginForm(forms.ModelForm):
     username = forms.CharField(max_length=30, label='Логин')

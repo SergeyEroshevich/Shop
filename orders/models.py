@@ -27,7 +27,7 @@ class Order(models.Model):
     status = models.CharField(max_length=50, default='Принято в обработку', choices=CHOICES_STATUS, verbose_name='Статус заказа')
     payment = models.CharField(max_length=50, choices=CHOICES_PAYMENT, verbose_name='Способ оплаты')
     delivery = models.CharField(max_length=50, choices=CHOICES_DELIVERY, verbose_name='Способ доставки')
-    phone = models.CharField(max_length=13, blank=True)
+    phone = models.CharField(max_length=13, verbose_name='Телефон')
     postal_code = models.CharField(max_length=20, verbose_name='почтовый индекс', blank=True)
     city = models.CharField(max_length=100, verbose_name='город')
     street = models.CharField(max_length=100, verbose_name='улица')

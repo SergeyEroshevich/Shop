@@ -31,10 +31,8 @@ def product_list(request, category_slug=None):
 # детальная информация о товаре
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    rating = Rating.objects.filter(product=product)
     img = Image.objects.filter(product_id=id)
-    count = rating.count()
-    context = {'product': product, 'img': img, 'count': count}
+    context = {'product': product, 'img': img}
     return render(request, 'shop/product/detail.html', context)
 
 

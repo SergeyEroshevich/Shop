@@ -20,22 +20,23 @@
     </div>
 
     <div class="product-text">
-
+        <a href="{{ product.get_absolute_url }}review/" style="text-decoration: none;color: white">
         <div class="form__item">
              <div class="rating">
                  <div class="rating__body">
                       <div class="rating__active"></div>
                  </div>
                  <div class="rating__value">{{ product.rating|formatted_float }}</div>
-
-                {% if count > 0 %}
-                    <a style="color: deepskyblue; font-size: 18px; padding-bottom: 3px" href="{{ product.get_absolute_url }}review/">
-                        {{ count }} {{ count|ru_plural:"отзыв,отзыва,отзывов" }}</a>
-                {% else %}
-                    <span style="color: grey; font-size: 18px; padding-bottom: 3px">Нет отзывов</span>
-                {% endif %}
-            </div>
+             </div>
         </div>
+        </a>
+                {% if product.rating > 0 %}
+                    <p style="font-size: 18px; padding-left: 10px"><a style="color: deepskyblue;" href="{{ product.get_absolute_url }}review/">
+                        {{ product.product_rating.count }} {{ product.product_rating.count|ru_plural:"отзыв,отзыва,отзывов" }}</a></p>
+                {% else %}
+                    <p style="color: grey; font-size: 18px;">Нет отзывов</p>
+                {% endif %}
+
 
         <p>Цена: {{ product.price|mul:product.sale|floatformat:2 }} руб.</p>
         <p>Описание: {{ product.full_description }}</p>

@@ -89,6 +89,17 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shop',
+        'USER': 'shopuser',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS':(

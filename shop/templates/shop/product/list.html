@@ -19,18 +19,21 @@
 
 <div class="container">
     <div class="filter">
-        <div class="filter_search">
-            <p style="font-size: 25px">Поиск по параметрам:</p>
-                <form class="form" method="get">
-<!--                    {{ filter.form.as_p }}-->
-                    <p>Со скидкой: {{ filter.form.discount }}</p>
-                    <p>Производитель: {{ filter.form.brand }}</p>
-                    <p>Цена от {{ filter.form.price__gt }}</p>
-                    <p>Цена до {{ filter.form.price__lt }}</p>
-                    <p>Упорядочить: {{ filter.form.ordering }}</p>
-                    <input class="button-login" type="submit" style="padding-bottom: 30px" >
-                </form>
-        </div>
+        <p style="font-size: 25px">Поиск по параметрам:</p>
+
+        <form method="get">
+            <table  class="form-filter">
+<!--                        {{ filter.form }}-->
+                <tr><td>Со скидкой: {{ filter.form.discount }}</td></tr>
+                <tr><td>Производитель: {{ filter.form.brand }}</td></tr>
+                <tr><td>Цена от {{ filter.form.price__gt }}</td></tr>
+                <tr><td>Цена до {{ filter.form.price__lt }}</td></tr>
+                <tr><td>Упорядочить: {{ filter.form.ordering }}</td></tr>
+
+            </table>
+            <input class="button-login" type="submit" value="Найти" style="width: 160px" >
+        </form>
+
     </div>
 
 
@@ -49,7 +52,7 @@
                 </div>
 
                 <div class="item-text">
-                    <p style="font-size: 18px"><a href="{{ product.get_absolute_url }}">{{ product.name|upper }}</a></p>
+                    <p style="font-size: 15px"><a href="{{ product.get_absolute_url }}">{{ product.name|upper }}</a></p>
                     {% if product.discount %}
                         <span style="font-size: 16px"><s>{{ product.price }}</s></span>
                         <span style="color: coral; padding-left: 10px; font-size: 16px">{{ product.sale_price|floatformat:2 }} руб. </span>
@@ -79,8 +82,6 @@
                         <p style="color: grey; font-size: 18px; padding-bottom: 3px">Нет отзывов</p>
                     {% endif %}
                 </div>
-
-
 
             </div>
         {% endfor %}

@@ -1,8 +1,9 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_init
 from django.dispatch import receiver
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -35,7 +36,8 @@ def order_create(request):
             cart.clear()
             return render(request, 'orders/order/created.html', {'order': order})
     else:
-        form = OrderCreateForm(initial={'city': request.user.profile.city,
+        form = OrderCreateForm(initial={'phone': request.user.profile.phone,
+                                        'city': request.user.profile.city,
                                         'postal_code': request.user.profile.postal_code,
                                         'street': request.user.profile.street,
                                         'house': request.user.profile.house,
@@ -99,4 +101,14 @@ def mail_make_order(sender, **kwargs):
     from_email = 'micromagic.by@yandex.by'
     instance = kwargs.get('instance')
     to_mail = instance.buyer.email
-    send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
+    # send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
+
+@receiver(post_init, sender=User)
+def mail_registration(sender, **kwargs):
+    subject = 'Регистрация на сайте интернет-магазина'
+    html_message = render_to_string('orders/order/message_registration.html', {'user': kwargs.get('instance')})
+    plain_message = strip_tags(html_message)
+    from_email = 'micromagic.by@yandex.by'
+    instance = kwargs.get('instance')
+    to_mail = instance.email
+    # send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
