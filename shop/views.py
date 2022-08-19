@@ -116,6 +116,5 @@ def discounts(request):
 def payment(request):
     return render(request, 'shop/information_shop/payment.html')
 
-# мое резюме
-def pro(request):
-    return render(request, 'index.html')
+
+

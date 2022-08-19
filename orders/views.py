@@ -103,12 +103,7 @@ def mail_make_order(sender, **kwargs):
     to_mail = instance.buyer.email
     # send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
 
-@receiver(post_init, sender=User)
-def mail_registration(sender, **kwargs):
-    subject = 'Регистрация на сайте интернет-магазина'
-    html_message = render_to_string('orders/order/message_registration.html', {'user': kwargs.get('instance')})
-    plain_message = strip_tags(html_message)
-    from_email = 'micromagic.by@yandex.by'
-    instance = kwargs.get('instance')
-    to_mail = instance.email
-    # send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
+
+
+
+

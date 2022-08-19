@@ -1,7 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from .forms import LoginForm, RegistrationForm, ChangeUserlnfoForm
 from .models import Profile
@@ -85,4 +90,14 @@ def profile_change(request):
             return redirect('/accounts/profile/')
     context = {'form': form}
     return render(request, 'accounts/profile_change.html', context)
+
+@receiver(post_save, sender=User)
+def mail_registration(sender, **kwargs):
+    subject = 'Регистрация на сайте интернет-магазина'
+    html_message = render_to_string('orders/order/message_registration.html', {'user': kwargs.get('instance')})
+    plain_message = strip_tags(html_message)
+    from_email = 'micromagic.by@yandex.by'
+    instance = kwargs.get('instance')
+    to_mail = instance.email
+    # send_mail(subject, plain_message, from_email, [to_mail], html_message=html_message)
 
