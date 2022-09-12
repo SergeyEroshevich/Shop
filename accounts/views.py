@@ -21,7 +21,7 @@ def registration(request):
             user.save()
             profile = Profile(user=user)
             profile.save()
-            return redirect('/')
+            return redirect('shop:product_list')
     context = {'form': form}
     return render(request, 'accounts/registration.html', context)
 
@@ -33,7 +33,7 @@ def to_profile(request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('shop:product_list')
     context = {'form': form}
     return render(request, 'accounts/login.html', context)
 
