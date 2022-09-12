@@ -166,7 +166,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.yandex.by'
+<<<<<<< HEAD
 EMAIL_HOST_USER  =  env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+=======
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+>>>>>>> df1675c2864470a3d39a64bd33042ff20c1b79c1
 EMAIL_PORT = 587
 
