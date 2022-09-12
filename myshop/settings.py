@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'accounts',
     'django_filters',
     'mathfilters',
-    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
